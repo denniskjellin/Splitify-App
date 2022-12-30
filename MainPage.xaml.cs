@@ -5,7 +5,7 @@ public partial class MainPage : ContentPage
 	// variables for making the calculations
 	decimal bill;
 	int tip;
-	int noPersons = 1;
+	int numPersons = 1;
 
 	public MainPage()
 	{
@@ -17,26 +17,26 @@ public partial class MainPage : ContentPage
 		// in bill store entryBill.text, convert the string number to decimal
 		bill = decimal.Parse(entryBill.Text);
         // invoce calc
-        CalculateTotal();
+        CalculateTotalSum();
     }
 
-    private void CalculateTotal()
+    private void CalculateTotalSum()
     {
 		//Total tip
 		//Multiply tip with bill, divide by 100
 		var totalTip = (bill * tip) / 100;
 
 		// tip for each person
-		var tipByPerson = (totalTip / noPersons); // divide tip by persons
+		var tipByPerson = (totalTip / numPersons); // divide tip by persons
 		labelTipByPerson.Text = $"{tipByPerson:C}";
 
 		//Total, divide bill with number of persons
-		var subtotal = (bill / noPersons);
+		var subtotal = (bill / numPersons);
 		// change text to value of subtotal
 		labelSubtotal.Text = $"{subtotal:C}";
 
 		//Total by persons, bill + totaltip then divide by number of persons
-		var totalByPerson = (bill + totalTip) / noPersons;
+		var totalByPerson = (bill + totalTip) / numPersons;
 		// change text in total to value of totalByPersons
 		labelTotal.Text = $"{totalByPerson:C}";
 
@@ -49,7 +49,7 @@ public partial class MainPage : ContentPage
 		// show the data to the user
 		tipVal.Text = $"Tip slider: {tip}%";
 		// invoce calc
-		CalculateTotal();
+		CalculateTotalSum();
 
     }
 
@@ -69,24 +69,24 @@ public partial class MainPage : ContentPage
     private void buttonMinus_Clicked(object sender, EventArgs e)
     {
 		// check so persons is not less than 1.
-		if(noPersons > 1)
+		if(numPersons > 1)
 		{
-			noPersons--;
+			numPersons--;
 		}
 		// parse to string
-		labelNoPersons.Text = noPersons.ToString();
+		labelNumPersons.Text = numPersons.ToString();
 		// invoce calc
-		CalculateTotal();
+		CalculateTotalSum();
     }
 
     private void buttonPlus_Clicked(object sender, EventArgs e)
     {
-		// if button + is pressed, ++ noPersons
-		noPersons++;
-		// change text in label to noPersons, comvert to string
-        labelNoPersons.Text = noPersons.ToString();
+		// if button + is pressed, ++ numPersons
+		numPersons++;
+		// change text in label to numPersons, convert to string
+        labelNumPersons.Text = numPersons.ToString();
 		// Invoce calc
-		CalculateTotal();
+		CalculateTotalSum();
     }
 }
 
