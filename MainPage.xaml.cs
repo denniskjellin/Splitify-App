@@ -46,7 +46,7 @@ public partial class MainPage : ContentPage
     {
 		// store as int the value of the slider
 		tip = (int)labelTip.Value;
-		// show the data to the user
+		// show the data to the user (tip dispplay number on slider)
 		tipVal.Text = $"Tip slider: {tip}%";
 		// invoce calc
 		CalculateTotalSum();

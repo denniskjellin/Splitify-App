@@ -176,6 +176,7 @@
                 Maximum="50"
                 Minimum="0"
                 ValueChanged="sliderTip_ValueChanged"
+
                 />
             
             <!-- Row number 3 -->
