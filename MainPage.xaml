@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Splitify.MainPage">
+
+    <ContentPage.Resources>
+
+ 
+        <!-- Global Colors -->
+        <Color x:Key="DetailColor">#6CFFF6</Color>
+        <Color x:Key="Slider">#2D459B</Color>
+        <Color x:Key="MainFont">#F5F5F5</Color>
+
+        <!---LIGHT MODE COLORS-->
+        <Color x:Key="LightPanel">#00509A</Color>
+        <Color x:Key="LightInput">#ffffff</Color>
+        <Color x:Key="LightBackground">#EAE9E9</Color>
+        <Color x:Key="LightSecondaryFont">#2D2D2D</Color>
+
+        <!---DARK MODE COLORS-->
+
+        <Color x:Key="DarkPanel">#4A4A4A</Color>
+        <Color x:Key="DarkBackground">#313131</Color>
+        <Color x:Key="DarkButton">#085853</Color>
+        
+
+        <!--- Setting Theme colors for my app, one DarkMode and LightMode theme-->
+        <Style ApplyToDerivedTypes="True" TargetType="Page">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}" />
+        </Style>
+        
+      
+    </ContentPage.Resources>
+    
+    <!---Grid Layout-->
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".3*" />
+            <!--- height = 30% -->
+            <RowDefinition Height=".7*" />
+            <!--- height = 70% -->
+        </Grid.RowDefinitions>
+
+        <!---Frame for holding specified content-->
+        <Frame Padding="10"
+               BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkPanel}}"
+               BorderColor="Transparent">
+
+            <!---Grid Layout to create sections -->
+            <Grid>
+                <!---Columns-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1"/>
+                    <!---Divider line-->
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".1*"/>
+                    <RowDefinition Height=".9*"/>
+                    <!--takes remaining space-->
+                </Grid.RowDefinitions>
+
+                <!--- Label: Total amount/Person -->
+                <Label Grid.ColumnSpan="3" 
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       Text="TOTAL PER/PERSON"
+                       TextColor ="{StaticResource DetailColor}"
+                       />
+                <!--- Label: Currency summary total -->
+                <Label x:Name="labelTotal"
+                       Grid.Row="1"
+                       FontAttributes="Bold"
+                       FontSize="35"
+                       HorizontalTextAlignment="Center"
+                       Text="€0.00"
+                       TextColor="{StaticResource MainFont}"
+                       VerticalOptions="CenterAndExpand" />
+
+                <!-- Create the "breaking" divider in the middle -->
+                <BoxView
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,10,0,0"
+                    VerticalOptions="Center"
+                    Color="#B1B1B1" />
+                <!--Verical layout, to display the elements on the right side-->
+                <VerticalStackLayout
+                       Grid.Row="1"
+                        Grid.Column="2"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                    <!--Label settings -->
+                    <Label Text="SUBTOTAL"
+                           TextColor="{StaticResource MainFont}" />
+                    <Label x:Name="labelSubtotal"
+                           FontAttributes="Bold"
+                           Text="€0.00"
+                           TextColor="{StaticResource MainFont}" />
+                    <Label Margin="0,10,0,0"
+                           Text="Tip:"
+                           TextColor="{StaticResource MainFont}" />
+                    <Label x:Name="labelTipByPerson"
+                           FontAttributes="Bold"
+                           Text="€0.00"
+                           TextColor="{StaticResource MainFont}" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <!--Defining elements in the next grid row -->
+        <Grid Grid.Row="1"
+              Margin="0,15,0,0">
+            <!--Column width settings-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".3*" />
+                <ColumnDefinition Width=".7*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            
+            <!-- label for entering amount € -->
+            <Label Text="Enter amount: $"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                   VerticalOptions="Center" />
+            
+            <!---Entry element taking numeric input-->
+            <Entry x:Name="entryBill"
+                   
+                   Grid.Column ="1"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource LightInput}, Dark={StaticResource DarkPanel}}"
+                   Keyboard="Numeric"
+                   Text="0.0"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                   Completed="entryBill_Completed"
+                   VerticalOptions="Center" />
+
+            <Label Grid.Row="1"
+                   Text="Add tip:"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                   VerticalOptions="Center" />
+            
+            <!--Horizontal stack to display button element-->
+            <HorizontalStackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                HeightRequest="70"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="10">
+                
+                <!--Button styling -->
+                <Button Text="5%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
+                <Button Text="10%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
+                <Button Text="15%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
+            </HorizontalStackLayout>
+
+            <Label x:Name="tipVal"
+                Grid.Row="2"
+                   Text="Tip slider: 0%"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                   VerticalOptions="Center" />
+            
+            <!-- Slider control -->
+            <Slider
+                x:Name="labelTip"
+                Grid.Row="2"
+                Grid.Column="1"
+                Maximum="50"
+                Minimum="0"
+                ValueChanged="sliderTip_ValueChanged"
+                />
+            
+            <!-- Row number 3 -->
+            <Label Grid.Row="3"
+                   Text="Divide by:"
+                   TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                   VerticalOptions="Center" />
+
+            <HorizontalStackLayout
+                Grid.Row="3"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Button x:Name="buttonMinus"
+                        Text="-"
+                        WidthRequest="70"
+                        TextColor="{StaticResource MainFont}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}"
+                        Clicked="buttonMinus_Clicked"
+                        />
+                
+                <Label x:Name="labelNoPersons"
+                       Margin="-5,0,-5,0"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource LightInput}, Dark={StaticResource DarkPanel}}"
+                       FontSize="25"
+                       HeightRequest="50"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Text="1"
+                       TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       WidthRequest="100" />
+
+                <Button x:Name="buttonPlus"
+                        Text="+"
+                        TextColor="{StaticResource MainFont}"
+                        WidthRequest="70" 
+                        BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}"
+                        Clicked="buttonPlus_Clicked"
+                        />
+
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
+
+
+</ContentPage>
