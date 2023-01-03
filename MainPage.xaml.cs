@@ -3,8 +3,12 @@
 public partial class MainPage : ContentPage
 {
 	// variables for making the calculations
+
+	// bill holding bill amount
 	decimal bill;
+	// holding tip amount
 	int tip;
+	// holding the amount of persons, standard is one
 	int numPersons = 1;
 
 	public MainPage()
@@ -12,6 +16,7 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
+	//when an entry has ben made
     private void entryBill_Completed(object sender, EventArgs e)
     {
 		// in bill store entryBill.text, convert the string number to decimal
@@ -20,6 +25,7 @@ public partial class MainPage : ContentPage
         CalculateTotalSum();
     }
 
+	// making the calculation from each of the methods combined
     private void CalculateTotalSum()
     {
 		//Total tip
@@ -42,6 +48,7 @@ public partial class MainPage : ContentPage
 
     }
 
+	// listen to when value has ben changed in the slidercontrol
     private void sliderTip_ValueChanged(object sender, ValueChangedEventArgs e)
     {
 		// store as int the value of the slider
@@ -53,6 +60,7 @@ public partial class MainPage : ContentPage
 
     }
 
+	// listen to when any of the tipbuttons are clicked with a pree-defined value
     private void Button_Clicked(object sender, EventArgs e)
     {
 		// check conditions
@@ -66,6 +74,7 @@ public partial class MainPage : ContentPage
 		}
     }
 
+	// listen to if a person is removed
     private void buttonMinus_Clicked(object sender, EventArgs e)
     {
 		// check so persons is not less than 1.
@@ -79,6 +88,7 @@ public partial class MainPage : ContentPage
 		CalculateTotalSum();
     }
 
+	// listen to if a person is added
     private void buttonPlus_Clicked(object sender, EventArgs e)
     {
 		// if button + is pressed, ++ numPersons

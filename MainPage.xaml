@@ -5,7 +5,6 @@
 
     <ContentPage.Resources>
 
- 
         <!-- Global Colors -->
         <Color x:Key="DetailColor">#6CFFF6</Color>
         <Color x:Key="Slider">#2D459B</Color>
@@ -18,7 +17,6 @@
         <Color x:Key="LightSecondaryFont">#2D2D2D</Color>
 
         <!---DARK MODE COLORS-->
-
         <Color x:Key="DarkPanel">#4A4A4A</Color>
         <Color x:Key="DarkBackground">#313131</Color>
         <Color x:Key="DarkButton">#085853</Color>
@@ -28,8 +26,6 @@
         <Style ApplyToDerivedTypes="True" TargetType="Page">
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}" />
         </Style>
-        
-      
     </ContentPage.Resources>
     
     <!---Grid Layout-->
@@ -55,11 +51,10 @@
                     <!---Divider line-->
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
+                <!--set height-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".1*"/>
                     <RowDefinition Height=".9*"/>
-                    <!--takes remaining space-->
                 </Grid.RowDefinitions>
 
                 <!--- Label: Total amount/Person -->
@@ -119,22 +114,21 @@
                 <ColumnDefinition Width=".3*" />
                 <ColumnDefinition Width=".7*" />
             </Grid.ColumnDefinitions>
-            
+            <!-- inititate rows -->
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
+
             <!-- label for entering amount € -->
             <Label Text="Enter amount: $"
                    TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
                    VerticalOptions="Center" />
-            
+
             <!---Entry element taking numeric input-->
             <Entry x:Name="entryBill"
-                   
                    Grid.Column ="1"
                    BackgroundColor="{AppThemeBinding Light={StaticResource LightInput}, Dark={StaticResource DarkPanel}}"
                    Keyboard="Numeric"
@@ -147,7 +141,7 @@
                    Text="Add tip:"
                    TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
                    VerticalOptions="Center" />
-            
+
             <!--Horizontal stack to display button element-->
             <HorizontalStackLayout
                 Grid.Row="1"
@@ -155,19 +149,20 @@
                 HeightRequest="70"
                 HorizontalOptions="CenterAndExpand"
                 Spacing="10">
-                
+
                 <!--Button styling -->
                 <Button Text="5%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
                 <Button Text="10%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
                 <Button Text="15%" Clicked="Button_Clicked" WidthRequest="70" TextColor="{StaticResource MainFont}" BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}" />
             </HorizontalStackLayout>
 
+            <!--tipVal label -->
             <Label x:Name="tipVal"
                 Grid.Row="2"
                    Text="Tip slider: 0%"
                    TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
                    VerticalOptions="Center" />
-            
+
             <!-- Slider control -->
             <Slider
                 x:Name="labelTip"
@@ -178,13 +173,14 @@
                 ValueChanged="sliderTip_ValueChanged"
 
                 />
-            
+
             <!-- Row number 3 -->
             <Label Grid.Row="3"
                    Text="Divide by:"
                    TextColor="{AppThemeBinding Light={StaticResource LightSecondaryFont}, Dark={StaticResource MainFont}}"
                    VerticalOptions="Center" />
 
+            <!-- Stack layout for buttons -->
             <HorizontalStackLayout
                 Grid.Row="3"
                 Grid.Column="1"
@@ -198,7 +194,7 @@
                         BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}"
                         Clicked="buttonMinus_Clicked"
                         />
-                
+
                 <Label x:Name="labelNumPersons"
                        Margin="-5,0,-5,0"
                        BackgroundColor="{AppThemeBinding Light={StaticResource LightInput}, Dark={StaticResource DarkPanel}}"
@@ -219,10 +215,7 @@
                         BackgroundColor="{AppThemeBinding Light={StaticResource LightPanel}, Dark={StaticResource DarkButton}}"
                         Clicked="buttonPlus_Clicked"
                         />
-
             </HorizontalStackLayout>
         </Grid>
     </Grid>
-
-
 </ContentPage>
